@@ -9,7 +9,7 @@ import play.mvc.Controller;
  * @version 1.0
  * @created 1-1-2013 22:50:00
  */
-public class BaseController extends Controller{
+public class BaseController extends Controller {
 	
 	
 }
