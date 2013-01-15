@@ -81,7 +81,8 @@ public class OrderServiceImpl implements IOrderService {
 
 	@Override
 	public OrdersInfo getOrderById(int orderId) {
-		return orderDao.;
+		return null;
+		//return orderDao.;
 	}
 
 	public IOrderDao getOrderDao() {

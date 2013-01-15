@@ -31,7 +31,7 @@ public class Order extends BaseController {
 		if(pageInfo == null ) {
 			pageInfo = new PageInfo<OrdersInfo>();
 		}
-		pageInfo = orderService.queryByConditon();
+		//pageInfo = orderService.queryByConditon();
 		List<DeskInfo> desksList = new ArrayList<DeskInfo>();
 		renderTemplate("user/users.html", pageInfo, userNum, name, dept);
 	}
@@ -40,7 +40,7 @@ public class Order extends BaseController {
 	public static void deleteUser(int userId) {
 		String result = "";
 		try{
-			userService.deleteUser(userId);
+			//userService.deleteUser(userId);
 			result = "ok";
 		}catch (BusinessException e) {
 			result = "fail, because " + e.getMessage();
@@ -62,7 +62,7 @@ public class Order extends BaseController {
 			user.setDept(dept);
 			user.setReserveTimes(reserveTimes);
 			user.setBreakTimes(breakTimes);
-			userService.updateUser(user);
+			//userService.updateUser(user);
 			result = "ok";
 		}catch (BusinessException e) {
 			result = "fail, because " + e.getMessage();
@@ -84,7 +84,7 @@ public class Order extends BaseController {
 		user.setReserveTimes(0);
 		user.setBreakTimes(0);
 		try{
-			userId = userService.addUser(user);
+			//userId = userService.addUser(user);
 			result = "" + userId;
 		}catch (BusinessException e) {
 			result = "fail, because " + e.getMessage();
@@ -94,11 +94,12 @@ public class Order extends BaseController {
 	}
 
 	public IUserService getUserService() {
-		return userService;
+		//return userService;
+		return null;
 	}
 
 	public void setUserService(IUserService userService) {
-		this.userService = userService;
+		//this.userService = userService;
 	}
 	
 }
