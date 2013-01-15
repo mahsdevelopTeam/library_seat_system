@@ -34,7 +34,7 @@ public class User extends BaseController{
 			pageInfo = new PageInfo<UserInfo>();
 		}
 		pageInfo = userService.queryByConditon(userNum, name, dept, pageInfo);
-		List<DeskInfo> desksList = new ArrayList<DeskInfo>();
+		List<UserInfo> desksList = pageInfo.getResult();
 		renderTemplate("user/users.html", pageInfo, userNum, name, dept);
 	}
 	

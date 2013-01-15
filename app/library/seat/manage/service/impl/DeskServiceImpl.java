@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import javax.inject.Inject;
+
 import library.seat.manage.dao.IDeskDao;
 import library.seat.manage.dao.IOrderDao;
 import library.seat.manage.dto.DeskInfo;
@@ -24,8 +26,9 @@ import library.seat.manage.util.Operator;
  */
 public class DeskServiceImpl implements IDeskService {
 
-	
+	@Inject
 	private IDeskDao deskDao;
+	@Inject
 	private IOrderDao orderDao;
 	
 	@Override
@@ -73,7 +76,7 @@ public class DeskServiceImpl implements IDeskService {
 		for(OrdersInfo order : orderList) {
 			for (DeskInfo desk : deskList) {
 				if(order.getDeskId() == desk.getDeskId()) {
-					ChangeReseverStatus(order.getDeskNum(), desk);
+					ChangeReseverStatus(order.getSeatNum(), desk);
 				}
 			}
 		}
@@ -91,27 +94,35 @@ public class DeskServiceImpl implements IDeskService {
 		case 1 : 
 				reserverStatus = (Integer) desk.getExtFields().get("reserveStatus");
 				desk.getExtFields().put("reserveStatus", reserverStatus|128); 
+				break;
 		case 2 : 
 			reserverStatus = (Integer) desk.getExtFields().get("reserveStatus");
 			desk.getExtFields().put("reserveStatus", reserverStatus|64);
+			break;
 		case 3 : 
 			reserverStatus = (Integer) desk.getExtFields().get("reserveStatus");
 			desk.getExtFields().put("reserveStatus", reserverStatus|32); 
+			break;
 		case 4 : 
 			reserverStatus = (Integer) desk.getExtFields().get("reserveStatus");
 			desk.getExtFields().put("reserveStatus", reserverStatus|16); 
+			break;
 		case 5 : 
 			reserverStatus = (Integer) desk.getExtFields().get("reserveStatus");
-			desk.getExtFields().put("reserveStatus", reserverStatus|8); 
+			desk.getExtFields().put("reserveStatus", reserverStatus|8);
+			break;
 		case 6 : 
 			reserverStatus = (Integer) desk.getExtFields().get("reserveStatus");
 			desk.getExtFields().put("reserveStatus", reserverStatus|4); 
+			break;
 		case 7 : 
 			reserverStatus = (Integer) desk.getExtFields().get("reserveStatus");
 			desk.getExtFields().put("reserveStatus", reserverStatus|2); 
+			break;
 		case 8 : 
 			reserverStatus = (Integer) desk.getExtFields().get("reserveStatus");
-			desk.getExtFields().put("reserveStatus", reserverStatus|1); 
+			desk.getExtFields().put("reserveStatus", reserverStatus|1);
+			break;
 		}
 	}
 

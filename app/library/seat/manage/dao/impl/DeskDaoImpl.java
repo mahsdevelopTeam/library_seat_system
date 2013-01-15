@@ -70,6 +70,7 @@ public class DeskDaoImpl extends BaseDao implements IDeskDao {
 		    	desk.setBlock(rs.getString("BLOCK"));
 		    	desk.setDeskNum(rs.getInt("DESK_NUM"));
 		    	desk.setIsAble(rs.getBoolean("IS_ABLE"));
+		    	userList.add(desk);
 		    }
 		    return userList;
 		 } catch (SQLException e) {

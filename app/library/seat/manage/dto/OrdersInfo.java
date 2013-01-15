@@ -27,7 +27,7 @@ public class OrdersInfo extends ExtFieldDto {
 	/**
 	 * 桌子里的椅子号
 	 */
-	private int deskNum;
+	private int seatNum;
 	
 	/**
 	 * 预订类型
@@ -68,12 +68,12 @@ public class OrdersInfo extends ExtFieldDto {
 		this.deskId = deskId;
 	}
 
-	public int getDeskNum() {
-		return deskNum;
+	public int getSeatNum() {
+		return seatNum;
 	}
 
-	public void setDeskNum(int deskNum) {
-		this.deskNum = deskNum;
+	public void setSeatNum(int seatNum) {
+		this.seatNum = seatNum;
 	}
 
 	public String getReserveType() {
@@ -100,4 +100,5 @@ public class OrdersInfo extends ExtFieldDto {
 		this.reserveEndTime = reserveEndTime;
 	}
 
+	
 }

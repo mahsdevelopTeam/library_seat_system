@@ -24,7 +24,7 @@ import library.seat.manage.util.FieldValueCriteria;
  */
 public class OrderDaoImpl extends BaseDao implements IOrderDao {
 	
-	private static final String TABLE = "ORDER"; 
+	private static final String TABLE = "ORDERS"; 
 
 	@Override
 	public int add(OrdersInfo order) throws DataAccessException {
@@ -52,7 +52,7 @@ public class OrderDaoImpl extends BaseDao implements IOrderDao {
 		Connection conn = DB.getConnection();
 		PreparedStatement statement = null;
 		ResultSet rs = null;
-		List<OrdersInfo> userList = new ArrayList<OrdersInfo>();
+		List<OrdersInfo> orderList = new ArrayList<OrdersInfo>();
 		try {
 			statement = conn.prepareStatement(queryRecs.toString());
 		    for(int i=0; i<criteria.size(); i++) {
@@ -64,13 +64,13 @@ public class OrderDaoImpl extends BaseDao implements IOrderDao {
 		    	order.setId(rs.getInt("ID"));
 		    	order.setDeskId(rs.getInt("DESK_ID"));
 		    	order.setUserId(rs.getInt("USER_ID"));
-		    	order.setDeskNum(rs.getInt("DESK_NUM"));
-		    	order.setDeskNum(rs.getInt("DESK_NUM"));
+		    	order.setSeatNum(rs.getInt("SEAT_NUM"));
 		    	order.setReserveType(rs.getString("RESERVE_TYPE"));
 		    	order.setReserveBeginTime(rs.getTimestamp("RESERVE_BEGIN_TIME"));
 		    	order.setReserveEndTime(rs.getTimestamp("RESERVE_END_TIME"));
+		    	orderList.add(order);
 		    }
-		    return userList;
+		    return orderList;
 		 } catch (SQLException e) {
 			 throw new DataAccessException("error when search record", e);
 		 } finally {
