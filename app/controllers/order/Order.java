@@ -8,6 +8,7 @@ import java.util.List;
 import javax.inject.Inject;
 
 import library.seat.manage.dto.DeskInfo;
+import library.seat.manage.dto.FullOrderRecord;
 import library.seat.manage.dto.OrdersInfo;
 import library.seat.manage.dto.PageInfo;
 import library.seat.manage.dto.UserInfo;
@@ -17,6 +18,7 @@ import library.seat.manage.service.IDeskService;
 import library.seat.manage.service.IOrderService;
 import library.seat.manage.service.IUserService;
 import controllers.BaseController;
+import controllers.user.User;
 
 /**
  * 
@@ -32,6 +34,9 @@ public class Order extends BaseController {
 	@Inject
 	private static IDeskService deskService;
 	
+	@Inject
+	private static IUserService userService;
+	
 	public static void order(int user_id, int floor, String block, int desk_num, int seat_num) {
 		String result = "";
 		Timestamp now = new Timestamp(new Date().getTime());
@@ -46,6 +51,9 @@ public class Order extends BaseController {
 			int desk_id = deskService.getDeskId(floor, block, desk_num);
 			order.setDeskId(desk_id);
 			orderService.order(order);
+			UserInfo u = userService.getById(user_id);
+			u.setReserveTimes(u.getReserveTimes() + 1);
+			userService.updateUser(u);
 		} catch (BusinessException e) {
 			result = "fail, because " + e.getMessage();
 			e.printStackTrace();
@@ -53,14 +61,26 @@ public class Order extends BaseController {
 		renderText(result);
 	}
 
-	public static void orderList(PageInfo<OrdersInfo> pageInfo, 
-			String userNum, String name, String dept) {
+	public static void orderList(PageInfo<FullOrderRecord> pageInfo, 
+			int id, String userNum) {
 		if(pageInfo == null ) {
-			pageInfo = new PageInfo<OrdersInfo>();
+			pageInfo = new PageInfo<FullOrderRecord>();
 		}
-		//pageInfo = orderService.queryByConditon();
+		
+		List<OrdersInfo> orders = orderService.queryOrders(0, 0, null, null);
+		System.out.println(orders.size());
+		renderTemplate("reserve/orders.html");
+/*		pageInfo = orderService.queryByConditon();
 		List<DeskInfo> desksList = new ArrayList<DeskInfo>();
-		renderTemplate("user/users.html", pageInfo, userNum, name, dept);
+		renderTemplate("reserve/orders.html", pageInfo, userNum, name, dept);
+		if(desk == null) return "";
+		String result = "";
+		result += desk.getFloor() + "楼";
+		result += desk.getBlock() + "区";
+		result += desk.getDeskNum() + "号桌";
+		result += order.getSeatNum() + "号座位";
+		return result;*/
+		
 	}
 	
 	
@@ -135,6 +155,14 @@ public class Order extends BaseController {
 
 	public static void setDeskService(IDeskService deskService) {
 		Order.deskService = deskService;
+	}
+
+	public static IUserService getUserService() {
+		return userService;
+	}
+
+	public static void setUserService(IUserService userService) {
+		Order.userService = userService;
 	}
 	
 }

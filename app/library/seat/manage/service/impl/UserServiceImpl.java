@@ -37,6 +37,18 @@ public class UserServiceImpl implements IUserService{
 	}
 
 	@Override
+	public UserInfo getById(int id) throws BusinessException {
+		UserInfo result = null;
+		try {
+			result = userDao.getById(id);
+		} catch (DataAccessException e) {
+			throw new BusinessException("error_query_recd_fail", e);
+		}
+		return result;
+	}
+
+
+	@Override
 	public void deleteUser(int userId) throws BusinessException{
 		try {
             beforeDelete(userId);

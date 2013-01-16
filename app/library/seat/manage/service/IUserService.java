@@ -23,4 +23,6 @@ public interface IUserService {
 	PageInfo<UserInfo> queryByConditon(String userNum, String name, 
 			String dept, PageInfo pageInfo);
 	
+	UserInfo getById(int id) throws BusinessException;
+	
 }

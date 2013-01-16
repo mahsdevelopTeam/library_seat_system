@@ -238,6 +238,44 @@ public class UserDaoImpl extends BaseDao implements IUserDao {
 		    }
 		}
 	}
+
+	@Override
+	public UserInfo getById(int id) throws DataAccessException {
+		String insertSql = "SELECT * FROM USER WHERE USER_ID = ?";
+		Connection conn = DB.getConnection();
+		PreparedStatement statement = null;
+		ResultSet rs = null;
+		
+		try {
+		    statement = conn.prepareStatement(insertSql);
+		    statement.setInt(1, id);
+		    statement.execute();
+		    
+		    rs = statement.executeQuery();
+		    if(rs.next()) {
+		    	UserInfo user = new UserInfo();
+		    	user.setUserId(rs.getInt("USER_ID"));
+		    	user.setUserNum(rs.getString("USER_NUM"));
+		    	user.setPassword(rs.getString("PASSWORD"));
+		    	user.setName(rs.getString("NAME"));
+		    	user.setDept(rs.getString("DEPT"));
+		    	user.setReserveTimes(rs.getInt("RESERVE_TIMES"));
+		    	user.setBreakTimes(rs.getInt("BREAK_TIMES"));
+		    	return user;
+		    }
+		} catch (SQLException e) {
+			throw new DataAccessException("error when query record", e);
+		} finally {
+		    if (statement != null) {
+		        try {
+		            statement.close();
+		        } catch (SQLException e) {
+		            e.printStackTrace();
+		        }
+		    }
+		}
+		return null;
+	}
 	
 
 	
