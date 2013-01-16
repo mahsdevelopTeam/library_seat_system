@@ -28,7 +28,44 @@ public class OrderDaoImpl extends BaseDao implements IOrderDao {
 
 	@Override
 	public int add(OrdersInfo order) throws DataAccessException {
-		return 0;
+		String insertSql = "INSERT INTO ORDERS(USER_ID, DESK_ID, SEAT_NUM, RESERVE_TYPE, RESERVE_BEGIN_TIME, " +
+				"RESERVE_END_TIME) VALUES(?, ?, ?, ?, ?, ?)";
+		Connection conn = DB.getConnection();
+		PreparedStatement statement = null;
+		//ResultSet rs = null;
+		
+		try {
+		    statement = conn.prepareStatement(insertSql);
+		    statement.setString(1, "" + order.getUserId());
+		    statement.setString(2, "" + order.getDeskId());
+		    statement.setInt(3, order.getSeatNum());
+		    statement.setString(4, order.getReserveType());
+		    statement.setTimestamp(5, order.getReserveBeginTime());
+		    statement.setTimestamp(6, order.getReserveEndTime());
+		    statement.execute();
+		    
+		    /*
+		    String lastInsertId = "SELECT LAST_INSERT_ID() AS ID";
+		    rs = conn.prepareStatement(lastInsertId).executeQuery();
+		    if (rs.next()) {
+		        rs.absolute(1);
+		        int id = rs.getInt("ID");
+	            return id;
+		    }
+		    */
+		    
+		} catch (SQLException e) {
+			throw new DataAccessException("error when insert record", e);
+		} finally {
+		    if (statement != null) {
+		        try {
+		            statement.close();
+		        } catch (SQLException e) {
+		            e.printStackTrace();
+		        }
+		    }
+		}
+	    return 0;
 	}
 
 	@Override

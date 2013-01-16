@@ -900,6 +900,7 @@
 			var num = $('#deskModal .num').text();
 			if(num == '?'){
 				alert('请选择座位号');
+				return;
 			} else{
 				if(user == null){
 					alert('请先登录');
@@ -918,20 +919,28 @@
 			//上面得到的预约座位的详细参数内容orderDesk，下面的代码是ajax请求
 			
 			$.ajax({
-				url:"order/login",
-				dataType:"json",
+				url:"order/order",
+				dataType:"text",
 				cache:false,
-				type:"POST",
+				type:"GET",
 				data:{
-					user_num:$('#user_num').val(),
-					password:$('#password').val()
+					user_id: user.userId,
+					floor: orderDesk.floor,
+					block: orderDesk.block,
+					desk_num: orderDesk.deskNum,
+					seat_num: orderDesk.seatNum
 				},
 		      	success:function(request){
-			          user = request;
-			          console.log(user);
-			          alert(user.name + "登录成功！！！");
-			          $(".userInfo").remove();
-			          $("#header").append("<div align=right>" + user.name + "，欢迎您的使用！" + "</div>");
+			          if(request.length > 0) {
+			        	  alert("预订失败，请重新再试！");
+			        	  return;
+			          } else {
+			        	  alert("预订成功!");
+			        	  var target =  $('#deskModal .click');
+			        	  target.removeClass('notbook click');
+			        	  target.addClass('booked');
+						  
+			          }
 			      },
 			      error:function(request){
 			        alert("登录失败，请重新输入！");

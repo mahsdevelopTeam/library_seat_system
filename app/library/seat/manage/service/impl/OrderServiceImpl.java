@@ -93,6 +93,16 @@ public class OrderServiceImpl implements IOrderService {
 		this.orderDao = orderDao;
 	}
 
+	@Override
+	public void order(OrdersInfo order) throws BusinessException {
+		// TODO Auto-generated method stub
+		try {
+			orderDao.add(order);
+		} catch (DataAccessException e) {
+			throw new BusinessException("error_insert_recd_fail", e);
+		}
+	}
+
 	
 
 }

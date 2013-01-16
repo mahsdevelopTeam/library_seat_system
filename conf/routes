@@ -12,7 +12,6 @@ GET     /order/{action}                         order.Order.{action}
 GET     /index                                  admin.Admin.index
 POST	/index/login							user.User.login
 
-
 # Map static resources from the /app/public folder to the /public path
 GET     /public/                                staticDir:public
 
