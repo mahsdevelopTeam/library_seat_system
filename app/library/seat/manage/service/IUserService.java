@@ -18,6 +18,8 @@ public interface IUserService {
 	
 	void deleteUser(int userId) throws BusinessException;
 	
+	UserInfo loginCheck(String user_num, String password) throws BusinessException;
+	
 	PageInfo<UserInfo> queryByConditon(String userNum, String name, 
 			String dept, PageInfo pageInfo);
 	

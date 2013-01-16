@@ -21,8 +21,8 @@
 		<div class="userInfo">
 			<div class="loginFormSection">
 				<div class="loginForm">
-					<input type="text" class="input-small" placeholder="学号">
-	  				<input type="password" class="input-small" placeholder="密码">
+					<input type="text" class="input-small" placeholder="学号" id="user_num">
+	  				<input type="password" class="input-small" placeholder="密码" id="password">
 				</div>
 			</div>
 			
@@ -869,6 +869,32 @@
 			//console.log(newFloorNum);
 		});
 
+		
+		$('#login').on('click',function(){
+			$.ajax({
+				url:"index/login",
+				dataType:"json",
+				cache:false,
+				type:"POST",
+				data:{
+					user_num:$('#user_num').val(),
+					password:$('#password').val()
+				},
+		      	success:function(request){
+			          user = request;
+			          console.log(user);
+			          alert(user.name + "登录成功！！！");
+			          $(".userInfo").remove();
+			          $("#header").append("<div align=right>" + user.name + "，欢迎您的使用！" + "</div>");
+			      },
+			      error:function(request){
+			        alert("登录失败，请重新输入！");
+			     }
+			})
+		});
+		
+		
+		
 		//提交预订的事件处理函数
 		$('#submitOrderBtn').on('click',function(){
 			var num = $('#deskModal .num').text();
@@ -883,11 +909,34 @@
 			orderDesk.seatNum = $('#deskModal .click').text();
 
 			console.log(orderDesk);
+
+
+			//检查用户是否登录
 			
-
+			
+			
 			//上面得到的预约座位的详细参数内容orderDesk，下面的代码是ajax请求
-
-
+			
+			$.ajax({
+				url:"order/login",
+				dataType:"json",
+				cache:false,
+				type:"POST",
+				data:{
+					user_num:$('#user_num').val(),
+					password:$('#password').val()
+				},
+		      	success:function(request){
+			          user = request;
+			          console.log(user);
+			          alert(user.name + "登录成功！！！");
+			          $(".userInfo").remove();
+			          $("#header").append("<div align=right>" + user.name + "，欢迎您的使用！" + "</div>");
+			      },
+			      error:function(request){
+			        alert("登录失败，请重新输入！");
+			     }
+			})
 
 		});
 

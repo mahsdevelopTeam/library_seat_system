@@ -144,6 +144,30 @@ public class UserServiceImpl implements IUserService{
     }
     
     /**
+     * 检查用户信息是否正确
+     * 如不存在则抛出异常
+     * @throws BusinessException
+     */
+    @Override
+    public UserInfo loginCheck(String user_num, String password)
+    		throws BusinessException {
+    	
+    	List<FieldValueCriteria> criteria = new ArrayList<FieldValueCriteria>();
+    	criteria.add(new FieldValueCriteria("USER_NUM", user_num));
+        List<UserInfo> userList = userDao.findByCriteria(criteria);
+        if (userList.size() > 0 ) {
+        	if( !userList.get(0).getPassword().equals(password)) {
+        		throw new BusinessException("error_not_exsiting_user");
+        	} else {
+        		return userList.get(0);
+        	}
+        } else {
+        	throw new BusinessException("error_not_exsiting_user");
+        }
+    	
+    }
+    
+    /**
      * 更新记录前检查   *
      * @param user 用户     * @throws BusinessException 出现业务错误时将抛出异常
      */
@@ -166,5 +190,6 @@ public class UserServiceImpl implements IUserService{
 	public void setUserDao(IUserDao userDao) {
 		this.userDao = userDao;
 	}
+
 
 }
