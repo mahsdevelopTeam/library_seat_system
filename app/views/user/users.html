@@ -47,8 +47,8 @@
     <button id="findSubmit" type="button" class="btn btn-info">查询</button>
   </div> -->
   <div class="findForm findFormLong findFormHide">
-    <input type="text" name="userNum" placeholder="学号">Or
-    <input type="text" name="name" placeholder="姓名">Or
+    <input type="text" name="userNum" placeholder="学号">And
+    <input type="text" name="name" placeholder="姓名">And
     <input type="text" name="dept" placeholder="学院">
     <button id="findSubmit" type="button" class="btn btn-info">查询</button>
   </div>
@@ -243,8 +243,8 @@
 
       var tr = '<tr id='+userId +'><td>'+userNum+'</td><td>'+name+'</td><td>'+password+'</td><td>'+ 
                 dept+'</td><td>'+ reserveTimes+'</td>'+'</td><td>'+ breakTimes+'</td>' +
-          '<td><button class="btn btn-danger" type="button" cmd="delete">删除预订</button>'+
-          '<button class="btn btn-primary" type="button" cmd="update">修改预订</button></td>'+
+          '<td><button class="btn btn-danger" type="button" cmd="delete">删除用户</button>'+
+          '<button class="btn btn-primary" type="button" cmd="update">修改用户</button></td>'+
           '</tr>';
       $('#addUserForm').after(tr);
   }
