@@ -63,13 +63,29 @@ public class Order extends BaseController {
 
 	public static void orderList(PageInfo<FullOrderRecord> pageInfo, 
 			int id, String userNum) {
+		PageInfo<OrdersInfo> ordersPage = new PageInfo<OrdersInfo>();
+		//PageInfo<DeskInfo> desksPage = new PageInfo<DeskInfo>();
 		if(pageInfo == null ) {
 			pageInfo = new PageInfo<FullOrderRecord>();
+		} else {
+			ordersPage.setPageNo(pageInfo.getPageNo());
 		}
 		
+
+		ordersPage = orderService.queryByConditon(0, 0, null, null, ordersPage);
+		
+		//pageInfo.
 		List<OrdersInfo> orders = orderService.queryOrders(0, 0, null, null);
 		System.out.println(orders.size());
+		pageInfo.setTotalCount(orders.size());
+		for(OrdersInfo order : orders) {
+			UserInfo user = userService.getById(order.getUserId());
+			DeskInfo desk = deskService.getDeskById(order.getDeskId());
+			
+		}
 		renderTemplate("reserve/orders.html");
+		
+		
 /*		pageInfo = orderService.queryByConditon();
 		List<DeskInfo> desksList = new ArrayList<DeskInfo>();
 		renderTemplate("reserve/orders.html", pageInfo, userNum, name, dept);
