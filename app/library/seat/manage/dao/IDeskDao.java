@@ -27,4 +27,6 @@ public interface IDeskDao {
 	
 	PageInfo<DeskInfo> findByCriteria(
 			List<FieldValueCriteria> criteria, PageInfo pageInfo) throws DataAccessException;
+
+	int getDeskId(int floor, String block, int desk_num) throws DataAccessException;
 }

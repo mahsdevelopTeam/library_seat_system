@@ -6,6 +6,7 @@ import java.util.List;
 import library.seat.manage.dto.OrdersInfo;
 import library.seat.manage.dto.PageInfo;
 import library.seat.manage.exception.BusinessException;
+import library.seat.manage.exception.DataAccessException;
 
 /**
  * 
@@ -23,6 +24,8 @@ public interface IOrderService {
 			Timestamp reserveEndTime);
 	
 	OrdersInfo getOrderById(int orderId);
+
+	void order(OrdersInfo order) throws BusinessException;
 	
 	
 }

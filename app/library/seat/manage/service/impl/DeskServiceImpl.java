@@ -125,6 +125,18 @@ public class DeskServiceImpl implements IDeskService {
 			break;
 		}
 	}
+	
+	@Override
+	public int getDeskId(int floor, String block, int desk_num) throws BusinessException{
+		// TODO Auto-generated method stub
+		int result = -1;
+		try {
+			result = deskDao.getDeskId(floor, block, desk_num);
+		} catch (DataAccessException e) {
+			throw new BusinessException("err_get_recd_fail ", e);
+		}
+		return result;
+	}
 
 	public IDeskDao getDeskDao() {
 		return deskDao;
@@ -141,5 +153,6 @@ public class DeskServiceImpl implements IDeskService {
 	public void setOrderDao(IOrderDao orderDao) {
 		this.orderDao = orderDao;
 	}
+
 	
 }

@@ -74,6 +74,24 @@ public class User extends BaseController{
 		
 	}
 	
+	/**
+	 * 登录
+	 */
+	public static void login(String user_num, String password) {
+		String result = "";
+		UserInfo user = new UserInfo();
+		try {
+			Gson gson = new Gson();
+			user = userService.loginCheck(user_num, password);
+			result = gson.toJson(user);
+		} catch(BusinessException e) {
+			String msg = "fail, because " + e.getMessage();
+			result = "'msg':'" + msg + "'";
+			System.out.println("login " + msg);
+		}
+		renderText(result);
+	}
+	
 	public static void addUser(String userNum, String password, 
 			String name, String dept) {
 		String result="";

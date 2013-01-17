@@ -28,4 +28,6 @@ public interface IUserDao {
 	
 	PageInfo<UserInfo> findByCriteria(
 			List<FieldValueCriteria> criteria, PageInfo pageInfo) throws DataAccessException;
+
+	UserInfo getById(int id) throws DataAccessException;
 }

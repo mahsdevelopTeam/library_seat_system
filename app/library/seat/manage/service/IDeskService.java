@@ -5,6 +5,7 @@ import java.util.List;
 import library.seat.manage.dto.PageInfo;
 import library.seat.manage.dto.DeskInfo;
 import library.seat.manage.exception.BusinessException;
+import library.seat.manage.exception.DataAccessException;
 
 
 /**
@@ -23,5 +24,7 @@ public interface IDeskService {
 	List<DeskInfo> queryDeskList(int floor, String block);
 	
 	List<DeskInfo> queryBeResDeskList(int floor, String block);
+
+	int getDeskId(int floor, String block, int desk_num) throws BusinessException;
 	
 }

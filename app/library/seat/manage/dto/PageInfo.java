@@ -81,6 +81,7 @@ public class PageInfo<T> {
 	public String getOrder(){
 		return order;
 	}
+	
 	/**
 	 * 设置排序方式向.
 	 * 

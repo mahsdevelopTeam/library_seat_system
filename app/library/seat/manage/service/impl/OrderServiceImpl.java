@@ -82,6 +82,7 @@ public class OrderServiceImpl implements IOrderService {
 	@Override
 	public OrdersInfo getOrderById(int orderId) {
 		return null;
+		//return orderDao.;
 	}
 
 	public IOrderDao getOrderDao() {
@@ -90,6 +91,16 @@ public class OrderServiceImpl implements IOrderService {
 
 	public void setOrderDao(IOrderDao orderDao) {
 		this.orderDao = orderDao;
+	}
+
+	@Override
+	public void order(OrdersInfo order) throws BusinessException {
+		// TODO Auto-generated method stub
+		try {
+			orderDao.add(order);
+		} catch (DataAccessException e) {
+			throw new BusinessException("error_insert_recd_fail", e);
+		}
 	}
 
 	
